@@ -11,7 +11,6 @@ int main()
 	printf("12345678901234567890\n");
 	printf("My\tfriend\n");
 	printf("Goot\bd\tchance\n");
-
 	printf("Cow\rW\a\n");
 	// \t - 탭 \b 커서를 한칸 앞으로 \r - 커서를 맨 앞으로 \a - 경고음
 	system("pause");

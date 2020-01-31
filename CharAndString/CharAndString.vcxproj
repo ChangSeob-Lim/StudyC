@@ -23,11 +23,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{7e3b9778-0701-40a7-bfd9-22ef84df773c}</ProjectGuid>
+    <ProjectGuid>{7a20dc3d-c48a-4c3c-b37e-e7d24f314efe}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>EscapeTest</RootNamespace>
+    <RootNamespace>CharAndString</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>01 EscapeTest</ProjectName>
+    <ProjectName>03 CharAndString</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
