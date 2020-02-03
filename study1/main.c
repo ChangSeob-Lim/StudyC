@@ -1,20 +1,13 @@
-// 전체적으로 코드 다시 보고 공부하기
-// 보고 배껴서 만든거 
-// 코드보고 다시 공부하기
-
-#pragma warning ( disable : 4996 )
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <io.h>
-#include <Windows.h>
-#include <conio.h>
 
 struct _finddata_t fd;
 
 // 중복 파일 확인을 위한 구조체 
 struct usedName {
-	char name[_MAX_PATH];
+	char name[260];
 };
 
 int i; // 반복 변수 
@@ -34,7 +27,7 @@ void FileSearch(char file_path[])
 {//printf("file_path=%s\n", file_path);
 	intptr_t handle;
 	int check = 0;
-	char file_path2[_MAX_PATH]; // 복사할 주소
+	char file_path2[260]; // 복사할 주소
 
 	strcat(file_path, "\\"); // 배열 붙이기
 	strcpy(file_path2, file_path); // 배열 복사
@@ -49,7 +42,7 @@ void FileSearch(char file_path[])
 
 	while (_findnext(handle, &fd) == 0)
 	{
-		char file_pt[_MAX_PATH];
+		char file_pt[260];
 		strcpy(file_pt, file_path2);
 		strcat(file_pt, fd.name);
 
@@ -63,7 +56,7 @@ void FileSearch(char file_path[])
 		{//printf("파일명 : %s, 크기:%d\n", file_pt, fd.size);
 			int nameCheck = 0; // 같은 이름이 있는가 확인하기 위한 변수
 
-			for (i = 0; i < count; i++)
+			for (i = 0; i < count; i++) // 체크
 			{
 				if (strcmp(used[i].name, fd.name) == 0) // 같으면 0 
 				{
@@ -79,8 +72,8 @@ void FileSearch(char file_path[])
 
 			if (strstr(fd.name, ".txt")) // txt 파일이 있는가 확인
 			{
-				strcpy(used[count].name, fd.name);
-				count++;
+				strcpy(used[count].name, fd.name); // 배열에 복사해 넣기
+				count++; // 증가시켜
 
 				printf("파일명 : %s\n", fd.name);
 				//printf("파일명 : %s, 크기:%d\n", file_pt, fd.size);
@@ -122,9 +115,13 @@ int main()
 {
 	while (1)
 	{
-		char file_path[_MAX_PATH] = "C:\\Users\\PKNU\\Documents";    //C:\ 경로 탐색
+		char file_path[260] = "C:\\Users\\PKNU\\Documents";    //C:\ 경로 탐색
 		FileSearch(file_path);
 	}
 
 	return 0;
 }
+
+// 전체적으로 코드 다시 보고 공부하기
+// 보고 배껴서 만든거 
+// 코드보고 다시 공부하기
