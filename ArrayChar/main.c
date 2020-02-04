@@ -28,7 +28,7 @@ int main(void)
     strcpy(str2, str1);
     printf("%s %s\n", str1, str2);*/
 
-    char str[80];
+    char str[80] = "";
 
     printf("문자열 입력 : ");
     gets(str);

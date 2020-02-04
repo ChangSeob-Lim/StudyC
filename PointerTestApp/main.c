@@ -24,7 +24,7 @@ int main(void)
     //scanf("%d", pa);
     //printf("%d\n", a);
 
-    int a = 10, b = 20, total;
+    /*int a = 10, b = 20, total;
     double avg;
     int* pa, * pb;
     int* pt = &total;
@@ -38,7 +38,18 @@ int main(void)
 
     printf("µÎ Á¤¼ö°ª : %d, %d\n", *pa, *pb);
     printf("ÇÕ : %d\n", *pt);
-    printf("Æò±Õ : %.1lf\n", *pg);
+    printf("Æò±Õ : %.1lf\n", *pg);*/
+
+    int a = 10, b = 20;
+    const int* pa = &a;
+
+    printf("a : %d\n", *pa);
+    pa = &b;
+    printf("b : %d\n", *pa);
+    pa = &a;
+    a = 30;
+    printf("a : %d\n", *pa);
+
 
 	system("pause");
 	return EXIT_SUCCESS;
