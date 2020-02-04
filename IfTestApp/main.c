@@ -13,14 +13,24 @@
 // 메인함수
 int main(void) 
 {
-    int a = 10, b = 0;
-    
-    if (a >= 10)
+    int a = 0, b = 0;
+
+    if (a > 0)
     {
-        b = a;
+        b = 1;
     }
 
-    printf("a : %d, b : %d\n", a, b);
+    else if (a == 0)
+    {
+        b = 2;
+    }
+    
+    else
+    {
+        b = 3;
+    }
+
+    printf("b : %d\n", b);
 
 	system("pause");
 	return EXIT_SUCCESS;
