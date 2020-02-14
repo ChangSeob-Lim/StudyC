@@ -40,10 +40,106 @@
 #include <string.h>
 #include "card.h"
 
+card* head;
+int index = 0;
+int count = 1;
+
 // 메인함수
 int main(void)
 {
-    
+    int menu;
+    int num;
+    int card_num = 0;
+    char name[20];
+    char phone[20];
+    char e_mail[50];
+
+    head = NULL;
+    card* temp;
+    card* node = (card*)malloc(sizeof(card));
+
+    FILE* fp = fopen("card_data.txt", "r");
+
+    if (fp != NULL)
+    {
+        temp = head;
+        
+        while (fscanf(fp, "%d %s%s%s", &card_num, &name, &phone, &e_mail) != EOF)
+        {
+            node->card_num = card_num;
+            strcpy(node->name, name);
+            strcpy(node->phone, phone);
+            strcpy(node->e_mail, e_mail);
+            node->next = NULL;
+
+            temp = node;
+            temp = temp->next;
+
+            index++;
+            count = card_num + 1;
+        }
+    }
+
+    fp = fopen("card_data.txt", "w");
+
+    printf("명함관리 프로그램\n");
+    while (1)
+    {
+        printf("1번 입력, 2번 수정, 3번 삭제, 4번 전체출력, 5번 검색, 6번 종료\n");
+        scanf("%d", &menu);
+
+        switch (menu)
+        {
+        case 1: // 입력
+            head = input_business_card(head);
+            break;
+
+        case 2: // 수정
+            head = edit_business_card(head);
+            break;
+
+        case 3: // 삭제
+            head = delete_business_card(head);
+            break;
+
+        case 4: // 전체출력
+            head = show_all_cards(head);
+            break;
+
+        case 5: // 검색
+            printf("검색기능입니다. 명함번호를 입력해주세요. : ");
+            scanf("%d", &num);
+            getchar();
+
+            head = search_business_card(num, head);
+            system("pause");
+
+            break;
+
+        case 6: // 종료
+            temp = head;
+
+            while (temp->next != NULL)
+            {
+                fprintf(fp, "%d %s %s %s", temp->card_num, temp->name, temp->phone, temp->e_mail);
+
+                temp = temp->next;
+
+                if (temp->next != NULL)
+                {
+                    fprintf(fp, "\n");
+                }
+            }
+
+            return 0;
+
+        default:
+            printf("올바르지 않은 메뉴입니다.\n");
+            break;
+        }
+    }
+
+    fclose(fp);
 
     system("pause");
     return EXIT_SUCCESS;

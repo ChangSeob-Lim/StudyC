@@ -25,6 +25,9 @@
   <ItemGroup>
     <ClInclude Include="card.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="card_data.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{a2211dd4-efea-4089-a69d-f239bccde279}</ProjectGuid>

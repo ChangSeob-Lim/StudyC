@@ -143,12 +143,33 @@ void edit_business_card() //명함번호 입력으로 검색 후 폰번호, 이메일을 다시 입력
 
     if (num < count && num > 0)
     {
-        search_business_card(num);
+        int j;
+        int check = 0;
 
-        printf("폰번호를 수정하세요. : ");
-        scanf("%s", &business_card[num - 1].phone);
-        printf("이메일을 수정하세요. : ");
-        scanf("%s", &business_card[num - 1].e_mail);
+        for (int i = 0; i < index; i++)
+        {
+            if (business_card[i].card_num == num)
+            {
+                j = i;
+                check = 1;
+                break;
+            }
+        }
+
+        if (check)
+        {
+            search_business_card(j);
+
+            printf("폰번호를 수정하세요. : ");
+            scanf("%s", &business_card[j].phone);
+            printf("이메일을 수정하세요. : ");
+            scanf("%s", &business_card[j].e_mail);
+        }
+
+        else
+        {
+            printf("해당 명함이 없습니다.\n");
+        }
     }
 
     else

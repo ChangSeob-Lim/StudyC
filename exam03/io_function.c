@@ -34,3 +34,225 @@
   first created - 2020.02.14
   writer - Lim Chang Seob.
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "card.h"
+
+card* temp;
+extern int index;
+extern int count;
+
+card* input_business_card(card *head);
+card* show_all_cards(card* head);
+card* search_business_card(int num, card* head);
+card* edit_business_card(card* head);
+card* delete_business_card(card* head);
+
+card* input_business_card(card* head) //입력시는 한글이름, 폰번호, 이메일만 입력하고, 명함번호는 1에서부터 자동으로 증가 // 이름이 동일하고, 전화번호가 같으면 정보 입력 하지 않음
+{
+    char name[20];
+    char phone[20];
+    char e_mail[50];
+
+    card* node = (card*)malloc(sizeof(card));
+
+    printf("명함 입력입니다.\n");
+    printf("이름을 입력해주세요. : ");
+    scanf("%s", &name);
+    printf("폰번호를 입력해주세요. : ");
+    scanf("%s", &phone);
+
+    int check = 1;
+
+    temp = head;
+
+    if (temp != NULL)
+    {
+        while (temp->next != NULL)
+        {
+            if (strcmp(temp->name, name))
+            {
+                if (strcmp(temp->phone, phone))
+                {
+                    check = 0;
+                    break;
+                }
+            }
+
+            temp = temp->next;
+        }
+    }
+
+    if (check)
+    {
+        printf("이메일을 입력해주세요. : ");
+        scanf("%s", &e_mail);
+
+        node->card_num = count;
+        strcpy(node->name, name);
+        strcpy(node->phone, phone);
+        strcpy(node->e_mail, e_mail);
+        node->next = NULL;
+
+        temp = head;
+
+        if (temp == NULL)
+        {
+            temp = node;
+        }
+
+        else
+        {
+            temp = head;
+
+            while (temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+
+            temp->next = node;
+        }
+        
+        count++;
+        index++;
+
+        return temp;
+    }
+}
+
+card* show_all_cards(card* head) //명함번호 / 한글이름 / 폰번호 / 이메일 순으로 한줄씩 출력
+{
+    temp = head;
+
+    if (temp == NULL)
+    {
+        printf("명함이 없습니다.\n");
+    }
+
+    else
+    {
+        printf("전체 명함정보입니다.\n");
+        printf("명함번호 / 한글이름 / 폰번호 / 이메일\n");
+
+        while (temp != NULL)
+        {
+            printf("%d / %s / %s / %s\n", temp->card_num, temp->name, temp->phone, temp->e_mail);
+
+            temp = temp->next;
+        }
+    }
+
+    return temp;
+}
+
+card* search_business_card(int num, card* head) //검색 콘솔에서 명함번호 입력받아, 검색결과를 출력 후 키를 누르면 다시 메뉴를 출력
+{
+    int j = 0;
+    temp = head;
+
+    while (temp != NULL)
+    {
+        if (num == temp->card_num)
+        {
+            j = 1;
+            break;
+        }
+
+        temp = temp->next;
+    }
+
+    if (j)
+    {
+        printf("없는 명함번호입니다.\n");
+    }
+
+    else
+    {
+        printf("%d / %s / %s / %s\n", temp->card_num, temp->name, temp->phone, temp->e_mail);
+    }
+
+    return temp;
+}
+
+card* edit_business_card(card* head) //명함번호 입력으로 검색 후 폰번호, 이메일을 다시 입력받아 저장
+{
+    int num;
+    temp = head;
+
+    printf("명함번호를 입력해주세요. : ");
+    scanf("%d", &num);
+
+    if (num < count && num > 0)
+    {
+        int check = 0;
+
+        while (temp != NULL)
+        {
+            if (num == temp->card_num)
+            {
+                break;
+            }
+
+            temp = temp->next;
+        }
+
+        if (check)
+        {
+            search_business_card(num, head);
+
+            printf("폰번호를 수정하세요. : ");
+            scanf("%s", &temp->phone);
+            printf("이메일을 수정하세요. : ");
+            scanf("%s", &temp->e_mail);
+        }
+
+        else
+        {
+            printf("해당 명함이 없습니다.\n");
+        }
+    }
+
+    else
+    {
+        printf("없는 명함번호입니다.\n");
+    }
+
+    return temp;
+}
+
+card* delete_business_card(card* head) // 명함번호를 입력 받아 삭제, 동명이인이 있을 수 있으므로 show_all_cards()로 전체 출력 후 삭제할 명함번호 입력으로 삭제
+{
+    show_all_cards(head);
+
+    int num;
+    temp = head;
+
+    printf("명함번호를 입력해주세요. : ");
+    scanf("%d", &num);
+
+    if (num < count && num > 0)
+    {
+        while (temp->next->next != NULL)
+        {
+            if (num == temp->next->card_num)
+            {
+                break;
+            }
+
+            temp = temp->next;
+        }
+
+        temp->next = temp->next->next;
+
+        index--;
+    }
+
+    else
+    {
+        printf("없는 명함번호입니다.\n");
+    }
+
+    return temp;
+}
