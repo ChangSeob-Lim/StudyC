@@ -103,7 +103,7 @@ int main(void)
             break;
 
         case 4: // 전체출력
-            head = show_all_cards(head);
+            show_all_cards(head);
             break;
 
         case 5: // 검색

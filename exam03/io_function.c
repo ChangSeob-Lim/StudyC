@@ -45,7 +45,7 @@ extern int index;
 extern int count;
 
 card* input_business_card(card *head);
-card* show_all_cards(card* head);
+void show_all_cards(card* head);
 card* search_business_card(int num, card* head);
 card* edit_business_card(card* head);
 card* delete_business_card(card* head);
@@ -122,7 +122,7 @@ card* input_business_card(card* head) //입력시는 한글이름, 폰번호, 이메일만 입력
     }
 }
 
-card* show_all_cards(card* head) //명함번호 / 한글이름 / 폰번호 / 이메일 순으로 한줄씩 출력
+void show_all_cards(card* head) //명함번호 / 한글이름 / 폰번호 / 이메일 순으로 한줄씩 출력
 {
     temp = head;
 
@@ -143,8 +143,6 @@ card* show_all_cards(card* head) //명함번호 / 한글이름 / 폰번호 / 이메일 순으로 
             temp = temp->next;
         }
     }
-
-    return temp;
 }
 
 card* search_business_card(int num, card* head) //검색 콘솔에서 명함번호 입력받아, 검색결과를 출력 후 키를 누르면 다시 메뉴를 출력
@@ -152,7 +150,7 @@ card* search_business_card(int num, card* head) //검색 콘솔에서 명함번호 입력받�
     int j = 0;
     temp = head;
 
-    while (temp != NULL)
+    while (temp->next != NULL)
     {
         if (num == temp->card_num)
         {
